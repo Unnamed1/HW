@@ -36,6 +36,10 @@ function calc(array $arr, $op){
 			break;
 		case '/':
 			for($i=1; $i<$num; $i++){
+				if($arr[$i]==0){
+					$res='Деление на ноль! Введите другое число!';
+					break 2;
+				}
 				$res/=$arr[$i];
 			}
 			break;
@@ -47,7 +51,7 @@ $array=[];
 $num=mt_rand(5, 10);
 echo 'Числа: ';
 for($i=0; $i<$num; $i++){
-	echo $array[$i]=mt_rand(1, 5) . ' ';
+	echo $array[$i]=mt_rand(0, 5) . ' ';
 }
 echo '<br>';
 echo '+: ', calc($array, '+');
@@ -86,23 +90,27 @@ function calcEverithing(){
 			break;
 		case '/':
 			for($i=2; $i<$num; $i++){
+				if($arr[$i]==0){
+					$res='Деление на ноль! Введите другое число!';
+					break 2;
+				}
 				$res/=$arr[$i];
 			}
 			break;
 	}
 	echo $res . '<br>';
 }
-echo 'Числа: 5 1 2.5 1 2<br>';
-echo '+: ', calcEverithing('+', 5, 1, 2.5, 1, 2);
-echo '-: ', calcEverithing('-', 5, 1, 2.5, 1, 2);
-echo '*: ', calcEverithing('*', 5, 1, 2.5, 1, 2);
-echo '/: ', calcEverithing('/', 5, 1, 2.5, 1, 2);
+echo 'Числа: 5 1 2.5 0 2<br>';
+echo '+: ', calcEverithing('+', 5, 1, 2.5, 0, 2);
+echo '-: ', calcEverithing('-', 5, 1, 2.5, 0, 2);
+echo '*: ', calcEverithing('*', 5, 1, 2.5, 0, 2);
+echo '/: ', calcEverithing('/', 5, 1, 2.5, 0, 2);
 echo '<br>';
 
 //4
 function table($rows, $cols){
 	if(!is_int($rows) || !is_int($cols)){
-		echo 'Вводите только целые или вещественные числа <br>';
+		echo 'Вводите только целые числа <br>';
 		return;
 	}
 	echo '<table>';

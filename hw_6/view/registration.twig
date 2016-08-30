@@ -1,0 +1,28 @@
+{% extends 'layout.twig' %}
+{% block content %}
+<h6>Регистрация</h6>
+<form action="#" method="POST">
+	<p>
+		<label for="reg_user">Username: </label>
+	</p>
+	<p>
+		<input id="reg_user" name="reg_user" type="text">
+	</p>
+	<p>
+		<label for="reg_email">E-mail: </label>
+	</p>
+	<p>
+		<input id="reg_email" name="reg_email" type="text">
+	</p>
+	<p>
+		<label for="reg_pass">Password: </label>
+	</p>
+	<p>
+		<input id="reg_pass" name="reg_pass" type="password">
+	</p>
+	<input type="submit" name="reg" value="Зарегистрироваться"><br>
+	<div class="g-recaptcha" data-sitekey="6LdsyigTAAAAAH8hUE0XFQa7jC69Jv8MEZ__6yJP"></div>
+</form>
+<a href="../">Назад</a>
+<script src='https://www.google.com/recaptcha/api.js'></script>
+{% endblock %}

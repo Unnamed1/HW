@@ -1,0 +1,64 @@
+{% extends 'layout.twig' %}
+{% block content %}
+<h6>Добро пожаловать, {{users_login}}</h6>
+<form action="#" method="POST">
+	<p>
+		<label for="auth_name">Name: </label>
+	</p>
+	<p>
+		<input id="auth_name" name="auth_name" type="text" value="{{res.0}}">
+	</p>
+	<p>
+		<label for="auth_age">Age: </label>
+	</p>
+	<p>
+		<input id="auth_age" name="auth_age" type="text" value="{{res.1}}">
+	</p>
+	<p>
+		<label for="auth_about">About: </label>
+	</p>
+	<p>
+		<textarea id="auth_about" name="auth_about" type="text">{{res.2}}</textarea>
+	</p>
+	<input type="submit" name="auth_save" value="Сохранить!">
+</form>
+<form action="#" method="POST" enctype="multipart/form-data">
+	<p>Ваша фотография: </p>
+	{% if res.3 %}
+		<p><img src="photos/{{res.3}}"></p>
+	{% else %}
+		<p>У вас пока нет фотографии.</p>
+	{% endif %}
+	<p>
+		<input name="auth_photo" type="file">
+	</p>
+	<input type="submit" name="auth_upload" value="Загрузить!">
+</form>
+<p>Список файлов, загруженных вами:</p>
+<ul>
+	{% if not rows and not res.3 %}
+		<p>Пока загруженных файлов нет</p>
+	{% elseif res.3 %}
+		<li>{{res.3}}</li>
+	{% endif %}
+	{% for arr in files %}
+		<li>{{arr.uploadedFiles_name}}</li>
+	{% endfor %}
+</ul>
+<form action="#" method="POST" enctype="multipart/form-data">
+	<p>
+		<input name="auth_file" type="file">
+		<input name="auth_id" type="hidden" value="<?=$res[4]?>">
+	</p>
+	<input type="submit" name="auth_uploadFile" value="Загрузить файл!">
+</form>
+<p>Список пользователей, зарегистрированных на сайте:</p>
+<ul>
+	{% for arr in users %}
+	<li>{{arr.users_login}} --- {% if arr.users_age>=18 %} Совершеннолетний {% else %} Несовершеннолетний {% endif %}</li>
+	{% endfor %}
+</ul>
+<form action="#" method="POST">
+	<input type="submit" name="auth_logout" value="Выйти">
+</form>
+{% endblock %}

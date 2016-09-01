@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	{% if status %}
+		<p style='color: {{status.color}}'>{{status.status}}</p>
+	{% endif %}
+	{% block content %}
+	{% endblock %}
+</body>
+</html>

@@ -1,0 +1,20 @@
+{% extends 'layout.twig' %}
+{% block content %}
+<h6>Авторизация</h6>
+<form action="#" method="POST">
+	<p>
+		<label for="auth_user">Username: </label>
+	</p>
+	<p>
+		<input id="auth_user" name="auth_user" type="text">
+	</p>
+	<p>
+		<label for="auth_pass">Password: </label>
+	</p>
+	<p>
+		<input id="auth_pass" name="auth_pass" type="password">
+	</p>
+	<input type="submit" name="auth" value="Войти"><br>
+	<a href="registration">Не зарегистрированы?</a>
+</form>
+{% endblock %}

@@ -2,6 +2,7 @@
 require_once('User.php');
 require_once('UploadedFiles.php');
 use Illuminate\Database\Capsule\Manager as Capsule;
+use Intervention\Image\ImageManagerStatic as Image;
 class Model{
 	public static function init(){
 		if(!Capsule::schema()->hasTable('users')){
@@ -43,7 +44,7 @@ class Model{
 			['users_login', '=', $validatedData['user']],
 			['users_pass', '=', $validatedData['pass']]
 		])->get()->toArray();
-		if(empty($user[0]['users_login']) || empty($user[0]['users_pass']) || $validatedData['user']!=$user[0]['users_login'] || $validatedData['pass']!=$user[0]['users_pass']){
+		if($validatedData['user']!=$user[0]['users_login'] || $validatedData['pass']!=$user[0]['users_pass']){
 			return false;
 		}
 		return [$user[0]['users_login'], $user[0]['users_pass']];
@@ -201,14 +202,21 @@ class Model{
 	public static function uploadImg(){
 		$user=new User;
 		$res=$user->where('users_login', '=', $_SESSION['users_login'])->value('users_photo');
-		if(isset($res[0])){
-			unlink("photos/$res[0]");
+		if(isset($res)){
+			unlink("photos/$res");
 		}
 		$users_photo=date('dmyHis').trim(strip_tags(htmlspecialchars($_FILES['auth_photo']['name'])));
 		if(!file_exists('photos')){
 			mkdir('photos');
 		}
 		move_uploaded_file($_FILES['auth_photo']['tmp_name'], "photos/$users_photo");
+		$canvas=Image::canvas(480, 480);
+		$img=Image::make("photos/$users_photo");
+		$img->resize(480, 480, function($constraint){
+			$constraint->aspectRatio();
+		});
+		$canvas->insert($img, 'center');
+		$canvas->save("photos/$users_photo");
 		$user->where('users_login', '=', $_SESSION['users_login'])->update(['users_photo'=>$users_photo]);
 		return true;
 	}

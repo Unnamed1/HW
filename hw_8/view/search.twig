@@ -1,0 +1,14 @@
+{% extends 'layout.twig' %}
+{% block content %}
+	<div>
+		<p><a href="/">На главную</a></p>
+		<p><a href="/catalogues">Перейти к каталогам</a></p>
+		<p><a href="/products">Перейти к товарам</a></p>
+	</div>
+	<p>Поиск товара</p>
+	<input type="text" name="search">
+	<table id="search">
+	</table>
+	<script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous"></script>
+	<script src="script/js/search.js"></script>
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends 'layout.twig' %}
+{% block content %}
+	{% if status %}
+		<p style="color:{{status.color}}">{{status.msg}}</p>
+	{% endif %}
+	<div>
+		<p><a href="/catalogues">Перейти к каталогам</a></p>
+		<p><a href="/products">Перейти к товарам</a></p>
+		<p><a href="/search">Перейти к поиску товара</a></p>
+	</div>
+	<div>
+		<p>Поместить картинку на стене в социальной сети ВК</p>
+		<form method="POST" action="script/php/index.php" enctype="multipart/form-data">
+			<p>Идентификатор пользователя</p>
+			<input type="text" name='post_id'>
+			<p>Загружаемое изображение</p>
+			<input type="file" name="post_img">
+			<p><input type="submit" name="post_send" value="Отправить!"></p>
+		</form>
+	</div>
+{% endblock %}

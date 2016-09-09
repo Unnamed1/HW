@@ -1,0 +1,23 @@
+{% extends 'layout.twig' %}
+{% block content %}
+	<div>
+		<p><a href="/">На главную</a></p>
+		<p><a href="/catalogues">Перейти к каталогам</a></p>
+		<p><a href="/products">Перейти к товарам</a></p>
+		<p><a href="/search">Перейти к поиску товара</a></p>
+	</div>
+	<table id="products_id">
+		<thead>
+			<tr>
+				<td>Name</td>
+				<td>Price</td>
+				<td>Quantity</td>
+				<td>Mark</td>
+				<td>Description</td>
+				<td>Catalogue</td>
+			</tr>
+		</thead>
+	</table>
+	<script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous"></script>
+	<script src="../script/js/products_id.js"></script>
+{% endblock %}

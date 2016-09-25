@@ -1,0 +1,19 @@
+<h1>Новый заказ!</h1>
+<table>
+	<thead>
+		<tr>
+			<td>Имя</td>
+			<td>E-Mail</td>
+			<td>Товары</td>
+			<td>Сумма</td>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>{{$name}}</td>
+			<td>{{$email}}</td>
+			<td>{{$products}}</td>
+			<td>{{$sum}}</td>
+		</tr>
+	</tbody>
+</table>

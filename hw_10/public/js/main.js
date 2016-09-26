@@ -432,7 +432,6 @@ $(document).ready(function(){
 			data: formData,
 			success: function(res){
 				if(!res.success){
-					console.log(res);
 					var errors='<ul>';
 					$.each(res.validationErrors, function(key, value){
 						errors+='<li>'+value+'</li>';
@@ -446,6 +445,9 @@ $(document).ready(function(){
 						window.location.replace('/');
 					}, 0);
 				}
+			},
+			error: function(res){
+				$('.checkout__status').html('В ходе обработки запроса произошла ошибка. Повторите попытку позже.');
 			}
 		});
 	});

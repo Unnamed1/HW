@@ -180,7 +180,6 @@ class ProductController extends Controller
             $products.=$product->name.', ';
         }
         $products=rtrim($products, ', ');
-        DB::insert('INSERT INTO orders (name, email, products, price) VALUES (?, ?, ?, ?)', [$request->name, $request->email, $products, $request->sum]);
         Mail::send('mail', ['name'=>$request->name, 'email'=>$request->email, 'products'=>$products, 'sum'=>$request->sum], function($m){
             $m->from('noreply@gamesmarket.localhost', 'GamesMarket');
             $admins=User::where('isadmin', '=', 1)->get();
@@ -188,6 +187,7 @@ class ProductController extends Controller
                 $m->to($admin->email)->subject('Order Notification');
             }
         });
+        DB::insert('INSERT INTO orders (name, email, products, price) VALUES (?, ?, ?, ?)', [$request->name, $request->email, $products, $request->sum]);
         $request->session()->forget('productsInCart');
         return response()->json(['success'=>true]); 
     }
